@@ -264,7 +264,7 @@
 
         // Handle Days Logic
         let selectedDays = [];
-        const allowedDaysData = {{ ALLOWED_DAYS }};
+        const allowedDaysData = JSON.parse('{{ALLOWED_DAYS}}');
 
         if (allowedDaysData && Array.isArray(allowedDaysData)) {
             selectedDays = allowedDaysData;

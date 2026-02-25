@@ -65,12 +65,12 @@ class TaskServer(BaseHTTPRequestHandler):
                 # Checkboxes for days
                 days_js = json.dumps(allowed_days)
                 
-                html_content = html_content.replace('{{TASK_ID}}', task['id'])
-                html_content = html_content.replace('{{TASK_NAME}}', task['name'])
-                html_content = html_content.replace('{{TASK_PRIORITY}}', task['priority'])
-                html_content = html_content.replace('{{REPEAT_NUMBER}}', repeat_num)
-                html_content = html_content.replace('{{REPEAT_UNIT}}', repeat_unit)
-                html_content = html_content.replace('{{ALLOWED_DAYS}}', days_js)
+                html_content = html_content.replace('{{TASK_ID}}', task['id']).replace('{{ TASK_ID }}', task['id'])
+                html_content = html_content.replace('{{TASK_NAME}}', task['name']).replace('{{ TASK_NAME }}', task['name'])
+                html_content = html_content.replace('{{TASK_PRIORITY}}', task['priority']).replace('{{ TASK_PRIORITY }}', task['priority'])
+                html_content = html_content.replace('{{REPEAT_NUMBER}}', repeat_num).replace('{{ REPEAT_NUMBER }}', repeat_num)
+                html_content = html_content.replace('{{REPEAT_UNIT}}', repeat_unit).replace('{{ REPEAT_UNIT }}', repeat_unit)
+                html_content = html_content.replace('{{ALLOWED_DAYS}}', days_js).replace('{{ ALLOWED_DAYS }}', days_js)
                 
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
@@ -318,15 +318,12 @@ class TaskServer(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'status': 'success'}).encode('utf-8'))
             
-        elif self.path == '/cancel':
-            # Handle cancellation - just shut down server
-            if APP_INSTANCE:
-                self._schedule_shutdown(delay=1.0)
+        elif self.path == '/save':
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length == 0:
+                self.send_error(400, "Missing post data")
+                return
                 
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-            content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
             
             try:
@@ -356,7 +353,7 @@ class TaskServer(BaseHTTPRequestHandler):
                     )
                     APP_INSTANCE.refresh_tasks_submenu()
                     
-                    # Schedule server shutdown after 2 seconds (faster than before)
+                    # Schedule server shutdown after 2 seconds
                     self._schedule_shutdown(delay=2.0)
                 
                 # Send success response
@@ -367,6 +364,16 @@ class TaskServer(BaseHTTPRequestHandler):
                 
             except Exception as e:
                 self.send_error(500, f"Error processing update: {e}")
+                
+        elif self.path == '/cancel':
+            # Handle cancellation - just shut down server
+            if APP_INSTANCE:
+                self._schedule_shutdown(delay=1.0)
+                
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'status': 'cancelled'}).encode('utf-8'))
                 
         elif self.path == '/cancel_op': # renamed to avoid conflict if user meant the other cancel
             # Handle cancellation - just shut down server
