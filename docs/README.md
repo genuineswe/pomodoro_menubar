@@ -1,6 +1,6 @@
-# PomodoroWork Tutorial
+# Pomodoro Menu Bar App Tutorial
 
-Welcome to the official tutorial for **PomodoroWork** – a macOS menu bar Pomodoro timer designed for professionals who want to manage energy, not just time.
+Welcome to the official tutorial for **Pomodoro Menu Bar App** – a macOS menu bar Pomodoro timer designed for professionals who want to manage energy, not just time.
 
 ## 📚 Table of Contents
 
@@ -12,6 +12,7 @@ Welcome to the official tutorial for **PomodoroWork** – a macOS menu bar Pomod
 | 4 | [Breaks & Feedback](04-breaks-and-feedback.md) | Zen Mode, mood tracking, and reflections |
 | 5 | [Advanced Features](05-advanced-features.md) | Workday End, Manual Mode, and Sleep Handling |
 | 6 | [Statistics & Customization](06-statistics-customization.md) | Viewing analytics and customizing your schedule |
+| 7 | [Upgrading](07-upgrading.md) | How to safely update the app to the latest version |
 
 ## 🚀 Quick Links
 

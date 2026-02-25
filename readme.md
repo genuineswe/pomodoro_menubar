@@ -1,9 +1,9 @@
-# PomodoroWork
+# Pomodoro Menu Bar App
 
 A **macOS menu bar** Pomodoro timer with task management, session logging, web-based task editor, and analytics.
 
-### Why PomodoroWork?
-PomodoroWork is built for those who value both their deep work and their peace of mind. It stays quietly in your menu bar, honoring your focus by staying out of the way while gently guiding you through a rhythm of intentional work and necessary rest. It’s not just about getting things done; it’s about ending your day with a sense of clarity, knowing exactly where your energy went.
+### Why Pomodoro Menu Bar App?
+Pomodoro Menu Bar App is built for those who value both their deep work and their peace of mind. It stays quietly in your menu bar, honoring your focus by staying out of the way while gently guiding you through a rhythm of intentional work and necessary rest. It’s not just about getting things done; it’s about ending your day with a sense of clarity, knowing exactly where your energy went.
 
 If this app helps you focus, please support the project: [![GitHub stars](https://img.shields.io/github/stars/gaweki/pomodoro_menubar?style=social)](https://github.com/gaweki/pomodoro_menubar) and share it with a friend. It really helps the project grow!
 
@@ -42,11 +42,11 @@ If this app helps you focus, please support the project: [![GitHub stars](https:
 ## 🎬 Demo Videos
 
 ### 1. Seamless Task Selection
-Easily select your next focus directly from the menu bar. If you haven't selected a task, PomodoroWork gently reminds you.
+Easily select your next focus directly from the menu bar. If you haven't selected a task, Pomodoro Menu Bar App gently reminds you.
 ![Task Selection Demo](videos/videofromnotasktoselecttask.gif)
 
 ### 2. The Great Transition (Zen Mode)
-Watch how PomodoroWork helps you disconnect by automatically opening the Zen Mode fullscreen interface when your session ends.
+Watch how Pomodoro Menu Bar App helps you disconnect by automatically opening the Zen Mode fullscreen interface when your session ends.
 ![Break Transition Demo](videos/videowhilechangeintobreaksession.gif)
 
 ### 3. Reflection & Mindfulness

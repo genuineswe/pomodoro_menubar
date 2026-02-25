@@ -2,7 +2,7 @@
 
 ## Understanding the Fixed Schedule
 
-PomodoroWork operates on a **fixed schedule** during weekdays (Monday–Friday). Here's the breakdown:
+Pomodoro Menu Bar App operates on a **fixed schedule** during weekdays (Monday–Friday). Here's the breakdown:
 
 | Period | Time | Sessions | Pattern |
 |--------|------|----------|---------|

@@ -1,8 +1,8 @@
 # Phase 1: Getting Started
 
-## What is PomodoroWork?
+## What is Pomodoro Menu Bar App?
 
-PomodoroWork is a **macOS menu bar application** that helps you stay focused using the Pomodoro Technique. Unlike typical timers, this app follows a **fixed daily schedule** that mirrors a professional workday:
+Pomodoro Menu Bar App is a **macOS menu bar application** that helps you stay focused using the Pomodoro Technique. Unlike typical timers, this app follows a **fixed daily schedule** that mirrors a professional workday:
 
 - **Morning Block:** 09:00 – 12:00 (6 work sessions)
 - **Lunch Break:** 12:00 – 13:00

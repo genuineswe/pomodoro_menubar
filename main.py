@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PomodoroWork - Menu Bar Application with Task Management
+Pomodoro Menu Bar App - Menu Bar Application with Task Management
 Displays Pomodoro timer in macOS menu bar with comprehensive task tracking
 """
 
