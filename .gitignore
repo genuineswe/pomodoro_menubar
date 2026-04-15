@@ -7,3 +7,6 @@ go_home_temp.html
 debug.log
 data/
 backup_vps.sh
+venv
+marketing*
+08-*

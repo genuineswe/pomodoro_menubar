@@ -3350,6 +3350,13 @@ class PomodoroMenuBarApp(rumps.App):
         # Calculate actual duration
         end_time = datetime.now()
         actual_duration_seconds = int((end_time - self.session_start_time).total_seconds())
+        
+        # Cegah "Ghost Session": Abaikan sesi yang sangat pendek (kurang dari 2 detik)
+        # Ini mencegah bug di mana laptop bangun dari sleep (masuk ke WORK 1 detik lalu pindah ke BREAK)
+        if actual_duration_seconds < 2:
+            print(f"⏭️ Sesi terlalu pendek ({actual_duration_seconds}s), tidak dicatat.")
+            return
+
         actual_duration_minutes = actual_duration_seconds // 60
         
         # Cap duration at 25 minutes to prevent sleep bug
@@ -3491,6 +3498,10 @@ class PomodoroMenuBarApp(rumps.App):
     @rumps.timer(1)
     def update_timer(self, _):
         """Update timer every second"""
+        # Mencegah PowerNap/Dark Wake mengeksekusi perpindahan UI ketika layar masih ditutup
+        if getattr(self, '_paused_for_sleep', False):
+            return
+            
         
         # Enforce Fixed Schedule Priority:
         # If DYNAMIC_SCHEDULE is active but we are now inside fixed work hours (09:00-18:00 Weekday),
@@ -3622,22 +3633,25 @@ class PomodoroMenuBarApp(rumps.App):
                 type_str = activity["type"]
                 session = activity["session"]
                 
+                # Hitung SISA WAKTU secara riil untuk disuntikkan ke halaman HTML
+                end_time_obj = datetime.strptime(activity["end"], "%H:%M").time()
+                end_dt = now.replace(hour=end_time_obj.hour, minute=end_time_obj.minute, second=0, microsecond=0)
+                remaining_secs = (end_dt - now).total_seconds()
+                calculated_duration = max(1, int(remaining_secs // 60) + (1 if remaining_secs % 60 > 0 else 0))
+                
                 if type_str == "WORK":
                     send_notification("Pomodoro", f"Session {session}: Work time!", "Glass")
                 elif "BREAK" in type_str:
-                    # Determine duration based on type
-                    duration = 15 if "LONG" in type_str else 5
-                    
                     send_notification("Break", f"Session {session}: {type_str}", "Crystal")
-                    # Open Zen Mode for breaks
+                    # Open Zen Mode for breaks (dengan sisa durasi aktual)
                     if not self.break_shown:
-                        open_break_mode(duration)
+                        open_break_mode(calculated_duration)
                         self.break_shown = True
                 elif type_str == "LUNCH":
                     send_notification("Lunch", "Enjoy your lunch!", "Submarine")
-                    # Open Zen Mode for lunch (60 mins)
+                    # Open Zen Mode for lunch (dengan sisa durasi aktual)
                     if not self.break_shown:
-                        open_break_mode(60)
+                        open_break_mode(calculated_duration)
                         self.break_shown = True
         
         # Show feedback dialog after 1 minute into break (non-blocking)
